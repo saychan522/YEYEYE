@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보 게임</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #0c2d48;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #choices {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>가위바위보 게임</h1>
+        <div id="choices">
+            <button onclick="play('가위')">가위</button>
+            <button onclick="play('바위')">바위</button>
+            <button onclick="play('보')">보</button>
+        </div>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function play(userChoice) {
+            var choices = ['가위', '바위', '보'];
+            var computerChoice = choices[Math.floor(Math.random() * 3)];
+            
+            var result = determineWinner(userChoice, computerChoice);
+            
+            document.getElementById("result").innerHTML = "사용자: " + userChoice + ", 컴퓨터: " + computerChoice + "<br>" + result;
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "무승부";
+            } else if ((userChoice === '가위' && computerChoice === '보') ||
+                    (userChoice === '바위' && computerChoice === '가위') ||
+                    (userChoice === '보' && computerChoice === '바위')) {
+                return "사용자 승리!";
+            } else {
+                return "컴퓨터 승리!";
+            }
+        }
+    </script>
+</body>
+</html>
